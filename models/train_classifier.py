@@ -38,7 +38,7 @@ import pickle
 
 def load_data(database_filepath):
     """ 
-    load data from the database
+    load data from the database - inpu: database_filepath
     """
     engine = create_engine('sqlite:///' + database_filepath)
     df = pd.read_sql('SELECT * FROM MessagesCategories', engine)
@@ -78,9 +78,12 @@ def tokenize(text):
 
 
 
-# verb extractor from the lecture
-class StartingVerbExtractor(BaseEstimator, TransformerMixin):
 
+class StartingVerbExtractor(BaseEstimator, TransformerMixin):
+    """
+    additional feature - verb extractor from the lecture
+    """
+    
     def starting_verb(self, text):
         sentence_list = nltk.sent_tokenize(text)
         for sentence in sentence_list:
@@ -99,6 +102,10 @@ class StartingVerbExtractor(BaseEstimator, TransformerMixin):
     
     
 def build_model():
+    """ 
+    Build improved model with best parameters from gridsearch         results cv.best_params_
+    
+    """
     
     pipeline = Pipeline([
         ('features', FeatureUnion([
@@ -111,7 +118,7 @@ def build_model():
             ('starting_verb_transformer', StartingVerbExtractor())
         ])),
 
-        ('classifier', multioutput.MultiOutputClassifier(RandomForestClassifier()))
+        ('classifier', multioutput.MultiOutputClassifier(RandomForestClassifier(n_estimators=20)))
     ])
     
     return pipeline
@@ -119,6 +126,8 @@ def build_model():
     
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    """evaluates the result of the model using classification report"""
+    
     Y_pred_test = model.predict(X_test)
     print(classification_report(Y_test.values, Y_pred_test, target_names=category_names))
     return 
@@ -126,7 +135,7 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 def save_model(model, model_filepath):
     """
-    saving the model 
+    saving the model to a pickle file
     """
     with open(model_filepath, 'wb') as f:
         pickle.dump(model, f)
