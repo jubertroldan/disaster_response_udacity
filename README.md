@@ -1,20 +1,17 @@
 # Disaster Response Pipeline Project
 
-<<<<<<< HEAD
+
 ![header](refs/DR_main_header.png)
 
-=======
->>>>>>> 06a0f5301411fe81c27428356de50caad9916749
 ## Project Description
 As part of the udacity nano degree course, this project aims to categorize text using Natural 
 language Processing (NLP). The intention and motivation of the project is to classify the text 
 as soon as it comes in (realtime). 
 
-<<<<<<< HEAD
+
 ![image](refs/DR_overview.png)
 
-=======
->>>>>>> 06a0f5301411fe81c27428356de50caad9916749
+
 this exercise showcases data science skills within an end to end proess. from data cleaning to deployment.
 which can be summarized as below:
 
