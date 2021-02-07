@@ -105,7 +105,11 @@ class StartingVerbExtractor(BaseEstimator, TransformerMixin):
     
 def build_model():
     """ 
+<<<<<<< HEAD
     Build improved model with best parameters from gridsearch results cv.best_params_
+=======
+    Build improved model with best parameters from gridsearch         results cv.best_params_
+>>>>>>> 06a0f5301411fe81c27428356de50caad9916749
     
     """
     
@@ -120,7 +124,11 @@ def build_model():
             ('starting_verb_transformer', StartingVerbExtractor())
         ])),
 
+<<<<<<< HEAD
         ('classifier', multioutput.MultiOutputClassifier(LogisticRegression()))
+=======
+        ('classifier', multioutput.MultiOutputClassifier(RandomForestClassifier(n_estimators=20)))
+>>>>>>> 06a0f5301411fe81c27428356de50caad9916749
     ])
     
     parameters_grid = {'classifier__estimator__penalty': ['l1','l2'], 
